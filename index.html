@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abd AlJaloudi — Theatrical Art</title>
+  <meta name="description" content="Portfolio of Abd AlJaloudi, theatrical art student and visual storyteller.">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+    :root {
+      --black: #0b0a09;
+      --cream: #eee8dc;
+      --red: #9d241d;
+      --gold: #b79b65;
+      --grey: #918a80;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: "Cormorant Garamond", serif;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--cream);
+      color: var(--black);
+    }
+
+    /* NAV */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 22px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 50;
+      background: linear-gradient(to bottom, rgba(11,10,9,.9), transparent);
+    }
+
+    .logo {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+    }
+
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      color: var(--gold);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 30px 35px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 15%, rgba(183,155,101,.18), transparent 34%),
+        radial-gradient(ellipse at 50% 40%, rgba(157,36,29,.13), transparent 40%),
+        var(--black);
+    }
+
+    /* spotlight */
+
+    .spotlight {
+      position: absolute;
+      width: 55vw;
+      height: 80vh;
+      left: 50%;
+      top: -15vh;
+      transform: translateX(-50%);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(238,232,220,.055),
+        transparent
+      );
+      clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%);
+      pointer-events: none;
+    }
+
+    .curtain {
+      position: absolute;
+      top: 0;
+      width: 15vw;
+      height: 100%;
+      opacity: .16;
+      background: repeating-linear-gradient(
+        90deg,
+        #4a100e 0px,
+        #4a100e 18px,
+        #170605 30px,
+        #4a100e 46px
+      );
+    }
+
+    .curtain.left { left: -4vw; }
+    .curtain.right { right: -4vw; }
+
+    .hero-label {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--grey);
+      margin-bottom: auto;
+    }
+
+    .hero-label .available {
+      color: var(--gold);
+    }
+
+    .hero-title {
+      position: relative;
+      z-index: 2;
+      max-width: 1250px;
+    }
+
+    .hero-title .small {
+      display: block;
+      font-size: clamp(22px, 3vw, 42px);
+      font-style: italic;
+      margin-left: 7vw;
+      color: var(--gold);
+      margin-bottom: -8px;
+    }
+
+    .hero-title h1 {
+      font-size: clamp(75px, 15vw, 220px);
+      font-weight: 500;
+      line-height: .72;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .hero-title h1 span {
+      display: block;
+    }
+
+    .hero-title h1 span:nth-child(2) {
+      margin-left: 14vw;
+    }
+
+    .hero-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid rgba(238,232,220,.25);
+      padding-top: 14px;
+      margin-top: 55px;
+    }
+
+    .hero-bottom p {
+      max-width: 360px;
+      font-size: 18px;
+      line-height: 1.25;
+    }
+
+    .scroll {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      color: var(--grey);
+      text-transform: uppercase;
+    }
+
+    /* MARQUEE */
+
+    .marquee {
+      border-top: 1px solid rgba(238,232,220,.15);
+      border-bottom: 1px solid rgba(238,232,220,.15);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 12px 0;
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: move 20s linear infinite;
+    }
+
+    .marquee span {
+      font-family: "DM Mono", monospace;
+      text-transform: uppercase;
+      font-size: 10px;
+      margin-right: 40px;
+      color: var(--grey);
+    }
+
+    .marquee .star {
+      color: var(--red);
+      font-size: 16px;
+    }
+
+    @keyframes move {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 130px 30px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(238,232,220,.2);
+      padding-bottom: 12px;
+      margin-bottom: 55px;
+    }
+
+    .section-head span {
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* WORK */
+
+    .works {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 75px 20px;
+    }
+
+    .work {
+      text-decoration: none;
+      color: var(--cream);
+      display: block;
+    }
+
+    .work:nth-child(1) {
+      grid-column: 1 / 8;
+    }
+
+    .work:nth-child(2) {
+      grid-column: 9 / 13;
+      margin-top: 130px;
+    }
+
+    .work:nth-child(3) {
+      grid-column: 2 / 7;
+    }
+
+    .work:nth-child(4) {
+      grid-column: 8 / 13;
+      margin-top: 100px;
+    }
+
+    .work-image {
+      overflow: hidden;
+      background: #1b1815;
+      position: relative;
+    }
+
+    .work-image::after {
+      content: "VIEW";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(157,36,29,.72);
+      color: var(--cream);
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .15em;
+      opacity: 0;
+      transition: opacity .4s ease;
+    }
+
+    .work:hover .work-image::after {
+      opacity: 1;
+    }
+
+    .work-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.7) contrast(1.05);
+      transition: transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .work:hover img {
+      transform: scale(1.05);
+    }
+
+    .work:nth-child(1) .work-image { aspect-ratio: 1.25 / 1; }
+    .work:nth-child(2) .work-image { aspect-ratio: .78 / 1; }
+    .work:nth-child(3) .work-image { aspect-ratio: 1 / 1.1; }
+    .work:nth-child(4) .work-image { aspect-ratio: 1.2 / 1; }
+
+    .work-info {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(238,232,220,.3);
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+
+    .work-name {
+      font-size: 22px;
+    }
+
+    .work-meta {
+      font-family: "DM Mono", monospace;
+      color: var(--grey);
+      font-size: 8px;
+      text-align: right;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    /* STATEMENT */
+
+    .statement {
+      background: var(--cream);
+      color: var(--black);
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .statement .section-head {
+      border-color: rgba(11,10,9,.2);
+    }
+
+    .statement-main {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .statement h2 {
+      font-size: clamp(55px, 8vw, 120px);
+      line-height: .82;
+      letter-spacing: -.06em;
+      font-weight: 500;
+    }
+
+    .statement h2 em {
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .statement-copy {
+      font-size: 18px;
+      line-height: 1.35;
+      max-width: 380px;
+    }
+
+    .statement-copy p {
+      margin-bottom: 22px;
+    }
+
+    .disciplines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .discipline {
+      border: 1px solid #aaa39a;
+      padding: 7px 10px;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      text-transform: uppercase;
+    }
+
+    /* THEATRE */
+
+    .theatre {
+      position: relative;
+      min-height: 85vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(157,36,29,.23), transparent 27%),
+        var(--black);
+    }
+
+    .theatre-symbol {
+      position: absolute;
+      right: 5vw;
+      top: 20%;
+      font-size: 35vw;
+      line-height: .7;
+      color: rgba(238,232,220,.025);
+      user-select: none;
+    }
+
+    .theatre-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .theatre h2 {
+      font-size: clamp(65px, 11vw, 160px);
+      font-weight: 500;
+      line-height: .78;
+      letter-spacing: -.07em;
+    }
+
+    .theatre h2 span {
+      color: var(--red);
+    }
+
+    .theatre-note {
+      margin-top: 50px;
+      margin-left: 15vw;
+      max-width: 330px;
+      color: var(--grey);
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    /* CONTACT */
+
+    .contact {
+      min-height: 80vh;
+      background: #120b0a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact h2 {
+      font-size: clamp(70px, 13vw, 190px);
+      font-weight: 500;
+      line-height: .75;
+      letter-spacing: -.08em;
+    }
+
+    .contact h2 span {
+      color: var(--gold);
+      margin-left: 13vw;
+    }
+
+    .contact-bottom {
+      border-top: 1px solid rgba(238,232,220,.2);
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .email {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 24px;
+      border-bottom: 1px solid var(--cream);
+    }
+
+    .socials {
+      display: flex;
+      gap: 20px;
+    }
+
+    .socials a {
+      color: var(--grey);
+      text-decoration: none;
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+    }
+
+    .socials a:hover {
+      color: var(--gold);
+    }
+
+    footer {
+      border-top: 1px solid rgba(238,232,220,.15);
+      padding: 18px 30px;
+      display: flex;
+      justify-content: space-between;
+      font-family: "DM Mono", monospace;
+      font-size: 8px;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 700px) {
+      nav {
+        padding: 18px;
+      }
+
+      nav ul {
+        gap: 14px;
+      }
+
+      .hero {
+        padding: 100px 18px 25px;
+      }
+
+      .hero-label {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero-title h1 {
+        font-size: 22vw;
+      }
+
+      .hero-title h1 span:nth-child(2) {
+        margin-left: 7vw;
+      }
+
+      .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      section {
+        padding: 90px 18px;
+      }
+
+      .works {
+        display: block;
+      }
+
+      .work {
+        margin: 0 0 65px !important;
+      }
+
+      .work-image {
+        aspect-ratio: 1 / 1 !important;
+      }
+
+      .statement-main {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .theatre-note {
+        margin-left: 0;
+      }
+
+      .contact-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+      }
+
+      .email {
+        font-size: 18px;
+      }
+
+      footer {
+        padding: 18px;
+        gap: 20px;
+        flex-direction: column;
+      }
+
+      .curtain {
+        width: 20vw;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">AA / Portfolio</div>
+    <ul>
+      <li><a href="#work">Works</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="spotlight"></div>
+    <div class="curtain left"></div>
+    <div class="curtain right"></div>
+
+    <div class="hero-label">
+      <div>
+        Theatrical Art / Visual Design<br>
+        Amman — Jordan
+      </div>
+      <div class="available">● Open for collaborations</div>
+    </div>
+
+    <div class="hero-title">
+      <span class="small">The stage is a canvas.</span>
+      <h1>
+        <span>ABD AL</span>
+        <span>JALOUDI</span>
+      </h1>
+    </div>
+
+    <div class="hero-bottom">
+      <div class="scroll">↓ Enter the portfolio</div>
+      <p>
+        A theatrical art student exploring performance,
+        scenography, visual storytelling and the spaces
+        between reality and fiction.
+      </p>
+    </div>
+  </header>
+
+  <div class="marquee">
+    <div class="marquee-inner">
+      <span>Theatre</span><span class="star">✦</span>
+      <span>Scenography</span><span class="star">✦</span>
+      <span>Performance</span><span class="star">✦</span>
+      <span>Visual Storytelling</span><span class="star">✦</span>
+      <span>Set Design</span><span class="star">✦</span>
+
+      <span>Theatre</span><span class="star">✦</span>
+      <span>Scenography</span><span class="star">✦</span>
+      <span>Performance</span><span class="star">✦</span>
+      <span>Visual Storytelling</span><span class="star">✦</span>
+      <span>Set Design</span><span class="star">✦</span>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="section-head">
+      <span>01 — Selected Works</span>
+      <span>04 Projects</span>
+    </div>
+
+    <div class="works">
+
+      <a class="work" href="#">
+        <div class="work-image">
+          <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1400&q=85" alt="Theatre stage">
+        </div>
+        <div class="work-info">
+          <div class="work-name">The Empty Stage</div>
+          <div class="work-meta">Set Design<br>2026</div>
+        </div>
+      </a>
+
+      <a class="work" href="#">
+        <div class="work-image">
+          <img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=1000&q=85" alt="Theatrical portrait">
+        </div>
+        <div class="work-info">
+          <div class="work-name">The Stranger</div>
+          <div class="work-meta">Performance<br>2026</div>
+        </div>
+      </a>
+
+      <a class="work" href="#">
+        <div class="work-image">
+          <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=85" alt="Stage performance">
+        </div>
+        <div class="work-info">
+          <div class="work-name">After the Curtain</div>
+          <div class="work-meta">Visual Research<br>2025</div>
+        </div>
+      </a>
+
+      <a class="work" href="#">
+        <div class="work-image">
+          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=85" alt="Art installation">
+        </div>
+        <div class="work-info">
+          <div class="work-name">A Room for Memory</div>
+          <div class="work-meta">Installation<br>2025</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="statement" id="about">
+    <div class="section-head">
+      <span>02 — Artist Statement</span>
+      <span>AA</span>
+    </div>
+
+    <div class="statement-main">
+      <h2>
+        I CREATE<br>
+        <em>WORLDS</em><br>
+        BEFORE THEY<br>
+        EXIST.
+      </h2>
+
+      <div class="statement-copy">
+        <p>
+          Abd AlJaloudi is a theatrical art student interested
+          in the relationship between performer, space and
+          audience.
+        </p>
+
+        <p>
+          His practice moves between theatre, scenography,
+          set design and visual research, treating every
+          performance as an opportunity to construct a new
+          world.
+        </p>
+
+        <div class="disciplines">
+          <span class="discipline">Scenography</span>
+          <span class="discipline">Set Design</span>
+          <span class="discipline">Performance</span>
+          <span class="discipline">Lighting</span>
+          <span class="discipline">Visual Art</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="theatre">
+    <div class="theatre-symbol">◐</div>
+
+    <div class="theatre-content">
+      <div class="section-head">
+        <span>03 — The Theatre</span>
+        <span>Space / Light / Body</span>
+      </div>
+
+      <h2>
+        EVERY<br>
+        <span>SPACE</span><br>
+        HAS A<br>
+        STORY.
+      </h2>
+
+      <p class="theatre-note">
+        Theatre begins before the actor enters.
+        A chair, a shadow, a wall, a sound — each
+        can become part of the narrative.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-head">
+      <span>04 — Contact</span>
+      <span>Let's create a scene</span>
+    </div>
+
+    <h2>
+      LET'S MAKE<br>
+      <span>THEATRE.</span>
+    </h2>
+
+    <div class="contact-bottom">
+      <a class="email" href="mailto:abd@example.com">
+        abd@example.com ↗
+      </a>
+
+      <div class="socials">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">Behance</a>
+        <a href="#" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Abd AlJaloudi</span>
+    <span>Designed for the stage</span>
+  </footer>
+
+</body>
+</html>
